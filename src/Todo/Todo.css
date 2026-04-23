@@ -5,6 +5,14 @@
   box-sizing: border-box;
 }
 
+.checkList{
+  text-decoration: line-through;
+}
+
+.not-checkList{
+  text-decoration: none;
+}
+
 /* Full screen container */
 .todo-container {
   min-height: 100vh;

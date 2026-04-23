@@ -9,7 +9,7 @@ const TodoForm = ({addTodo}) => {
     addTodo({
       id:Date.now(),
       content:inputValue,
-      checked:false
+      checked:inputValue.checked
     })
     setInputValue("");
   }
