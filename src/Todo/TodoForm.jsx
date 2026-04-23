@@ -6,7 +6,11 @@ const TodoForm = ({addTodo}) => {
   };
   const handleSubmit=(event)=>{
     event.preventDefault();
-    addTodo(inputValue)
+    addTodo({
+      id:Date.now(),
+      content:inputValue,
+      checked:false
+    })
     setInputValue("");
   }
   

@@ -1,15 +1,16 @@
 import { IoMdCheckbox } from "react-icons/io";
 import { MdDeleteForever } from "react-icons/md";
-const TodoList = ({ key, tasks, handleDelete }) => {
+const TodoList = ({ tasks, handleDelete }) => {
   return (
     <li className="todo-item">
-      {tasks}
+      {tasks.content}
       <button className="check-btn">
         <IoMdCheckbox />
       </button>
-      <button className="delete-btn" onClick={() => handleDelete(tasks)}>
+      <button className="delete-btn" onClick={() => handleDelete(tasks.id)}>
         <MdDeleteForever />
       </button>
+      
     </li>
   );
 };

@@ -2,27 +2,31 @@ import { useEffect, useState } from "react";
 import "./Todo.css";
 import TodoForm from "./TodoForm";
 import TodoList from "./TodoList";
+import TodoDate from "./TodoDate";
 
 export const Todo = () => {
   const [task, setTask] = useState([]);
   const [dataTime, setDateTime] = useState("");
-  const handleInput = (value) => {
-    setInputValue(value);
-  };
+  // const handleInput = (value) => {
+  //   setInputValue(value);
+  // };
   const handleSubmit = (inputValue) => {
-    if (!inputValue) return;
-    if (task.includes(inputValue)) return;
+    const { id, content, checked } = inputValue;
+    console.log(inputValue.content)
+    if (!content) return;
+    const isTodoContentMatched = task.find(
+      (currEle) => currEle.content === content,
+    );
+    if (isTodoContentMatched) return;
 
-    setTask((prev) => [...prev, inputValue]);
+    setTask((prev) => [...prev, {id,content,checked}]);
   };
   const handleClearBtn = () => {
     setTask([]);
   };
-  const handleDelete = (value) => {
-    console.log(task);
-    console.log(value);
+  const handleDelete = (id) => {
     const updatedVal = task.filter((curVal) => {
-      return curVal !== value;
+      return curVal.id!== id;
     });
     setTask(updatedVal);
   };
@@ -42,20 +46,21 @@ export const Todo = () => {
       <header className="header">
         <h2>Todo List</h2>
       </header>
-      <h2>{dataTime}</h2>
+      <TodoDate dateTime={dataTime} />
       <TodoForm addTodo={handleSubmit} />
       <section className="myUnOrdList">
         <ul>
-          {task.map((tasks, index) => {
+          {task.map((tasks) => {
             return (
-              <TodoList key={index} tasks={tasks} handleDelete={handleDelete} />
+              <TodoList key={tasks.id} tasks={tasks} handleDelete={handleDelete} />
             );
           })}
-          
         </ul>
       </section>
       <section>
-        <button className="clear-btn" onClick={handleClearBtn}>Clear All</button>
+        <button className="clear-btn" onClick={handleClearBtn}>
+          Clear All
+        </button>
       </section>
     </section>
   );
